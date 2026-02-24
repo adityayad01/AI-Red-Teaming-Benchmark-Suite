@@ -1,0 +1,7 @@
+# Create this file before git add
+echo "venv/
+data/results.db
+data/reports/
+__pycache__/
+*.pyc
+.env" > .gitignore
