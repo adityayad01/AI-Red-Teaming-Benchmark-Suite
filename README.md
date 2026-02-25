@@ -18,13 +18,82 @@
 
 ## 🎯 Problem Statement
 
-Companies are deploying LLMs into production without properly testing them for security vulnerabilities. There is **no standardized, automated tool** that:
-- Tests an LLM across all major adversarial attack types
-- Gives a clear vulnerability score per category
-- Generates a professional audit report
-- Is accessible to developers without a cybersecurity background
+In modern software development, teams spend months building and training AI models — but when it comes to deployment, **most skip security testing entirely.**
 
-**This tool solves that gap.**
+The typical pipeline looks like this:
+
+```
+Build Model → Train Model → Deploy to Production ❌ (no security testing)
+```
+
+This is dangerous. LLMs in production are exposed to millions of users, including malicious ones who actively try to:
+- Trick the model into ignoring its safety guidelines
+- Inject hidden instructions inside documents the AI processes
+- Force the model into harmful personas
+- Extract confidential system prompts and credentials
+
+**The cost of discovering these vulnerabilities AFTER deployment is enormous** — reputational damage, data breaches, and complete loss of user trust.
+
+The correct pipeline should be:
+
+```
+Build Model → Train Model → RED TEAM TEST ✅ → Fix Vulnerabilities → Safe Deployment
+```
+
+But there is no standardized, automated, accessible tool that does this — especially for teams without a dedicated cybersecurity background.
+
+**This project builds that missing tool.**
+
+---
+
+## 📸 Screenshots
+
+### 1. Sidebar — Connection Status
+> Both API and Ollama connection shown with live status badges
+
+![Sidebar](screenshots/01_sidebar.png)
+
+---
+
+### 2. Run Benchmark — Configuration Panel
+> Select model, choose attack categories, launch with one click
+
+![Run Benchmark](screenshots/02_run_benchmark.png)
+
+---
+
+### 3. Live Progress — Real-Time Results Table
+> Watch every attack result stream in live as the benchmark runs
+
+![Live Progress](screenshots/03_live_progress.png)
+
+---
+
+### 4. Results Summary — After Benchmark Completes
+> Safety score, verdict counts, and vulnerability chart per category
+
+![Results Summary](screenshots/04_results_summary.png)
+
+---
+
+### 5. View Results — Risk Cards + Charts
+> Detailed breakdown with category risk levels, pie chart, and bar chart
+
+![View Results](screenshots/05_view_results.png)
+
+---
+
+### 6. Download Report — PDF Generation
+> One-click professional PDF report generation and download
+
+![Download Report](screenshots/06_download_report.png)
+
+---
+
+### 7. Policy Engine Report — Audit Log
+> Security policy violations, BLOCK/FLAG actions, and full audit trail
+
+![Policy Report](screenshots/07_policy_report.png)
 
 ---
 
@@ -134,6 +203,7 @@ red-team-suite/
 │   ├── attack_prompts.json  # 80 adversarial prompts
 │   ├── results.db           # SQLite database (auto-created)
 │   └── reports/             # Generated PDF reports
+├── screenshots/             # Dashboard screenshots
 ├── requirements.txt
 └── README.md
 ```
@@ -148,9 +218,6 @@ red-team-suite/
 
 ### Step 1 — Install Ollama and pull a model
 ```bash
-# Install Ollama (Linux/Mac)
-curl -fsSL https://ollama.com/install.sh | sh
-
 # Pull a model (gemma3:1b works on 4GB RAM)
 ollama pull gemma3:1b
 
@@ -255,9 +322,33 @@ Testing `gemma3:1b` revealed:
 
 ## 👨‍💻 Author
 
-Built as part of the **ParadigmIT Cybersecurity — AI/ML Internship** application project.
+**Aditya Yadav**
+B.Tech CSE | Woxsen University | 2026 Batch
 
-> *"AI is transitioning from experimentation to core infrastructure. Traditional security approaches are failing. We need purpose-built tools to secure the next generation of AI systems."*
+---
+
+### 💭 Why I Built This
+
+Every day, companies are rushing AI products to market. Models get trained, fine-tuned, and pushed to production — but almost nobody asks the most important question first:
+
+> *"What happens when someone tries to break this?"*
+
+In modern AI development, security testing is treated as optional — something to think about later. But later never comes. The model ships, users find the vulnerabilities, and the damage is already done.
+
+I built this tool because that gap is real and dangerous. AI systems are no longer experimental toys — they are becoming core infrastructure handling sensitive decisions, processing private data, and operating with significant autonomy. Deploying them without red teaming is the equivalent of launching a website without ever testing for SQL injection.
+
+This project is my attempt to make AI security testing **automated, accessible, and standard** — not an afterthought.
+
+---
+
+### 🎓 What I Learned
+
+Building this from scratch taught me:
+- How adversarial prompt engineering works in practice
+- The difference between keyword-based and LLM-based safety evaluation
+- Why small models behave unpredictably under edge-case attacks
+- How to build production-grade Python APIs with streaming support
+- That security and AI are no longer separate fields — they are one
 
 ---
 
